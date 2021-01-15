@@ -61,32 +61,40 @@ $.ajax(movieApiUrl).done(function (data) {
         movieHtml += `<p>Year: <br>${movie.year}</p></div>`
         movieHtml += `  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
         Edit Movie
-    </button></div`
+    </button><br><br><br></div`
         $("#movies").append(movieHtml)
     })
+
+
 });
 // function editMovie(e){
 //     e.preventDefault();
 //
 //
 // // //update radio buttons
-// // let selected = $('input:radio[name=movieTitle]').click(function () {
-// //     console.log($(this.movie.title))
+$('#saveChanges').click(function () {
+
 //     // let movieTitleEditor = $("#addMovie").val();
 //     // let movieRateEditor = $("#addRating").val();
-//     // const movieObj = {
-//     //     "title": movieTitleEditor,
-//     //     "rating": movieRateEditor
-//     })
-// //
-//     const patchMethod = {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({title: movieTitleEditor}),
-//         body: JSON.stringify({rating: movieRateEditor})
-//     };
+    const edit = {
+        "title": document.querySelector('#addMovieModal').value,
+        "genre": document.querySelector('#addGenreModal').value,
+        "year": document.querySelector('#addYearModal').value
+    }
+//
+    const patchMethod = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({edit}),
+
+    };
+    console.log(edit);
+    fetch(movieApiUrl,edit).then(function (response){
+        console.log(response);
+    })
+})
 //
 // $("#edit").click(function () {
 //
