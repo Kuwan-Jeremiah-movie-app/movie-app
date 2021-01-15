@@ -53,15 +53,15 @@ $("#addNew").click(function (e) {
 
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
-        let movieHtml = "<div> <div class=\"card\" style=\"width: 18rem;\">";
+        let movieHtml = "<div> <div class=\"card \" style=\"width: 18rem;\">";
         movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" alt="">`
         movieHtml += `<div class="card-body">${movie.title.toUpperCase()}</div>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
         movieHtml += `<p>Year: <br>${movie.year}</p></div>`
-        movieHtml += `  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        movieHtml += `<span class="movieModal"><button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
         Edit Movie
-    </button><br><br><br></div`
+    </button></span><br><br><br></div>`
         $("#movies").append(movieHtml)
     })
 
@@ -70,7 +70,10 @@ $.ajax(movieApiUrl).done(function (data) {
 // function editMovie(e){
 //     e.preventDefault();
 //
-//
+$(".movieModal button").on("click", function(){
+    console.log(this);
+    // console.log("The movie id is: " + movieId)
+})
 // // //update radio buttons
 $('#saveChanges').click(function (e) {
     e.preventDefault();
@@ -80,15 +83,17 @@ $('#saveChanges').click(function (e) {
     const edit = {
         "title": document.querySelector('#addMovieModal').value,
         "genre": document.querySelector('#addGenreModal').value,
-        "year": document.querySelector('#addYearModal').value
+        "rating": document.querySelector('#addRatingModal').value,
+        "year": document.querySelector('#addYearModal').value,
+        "id": document.querySelector('').getAttribute('id')
     }
 
-    const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
-      fetch(movieApiUrl).then(function (response) {
-        response.json().then(function (movies) {
-            console.log(movies)
-        })
-    })
+    // const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
+      // fetch(movieApiUrl).then(function (response) {
+      //   response.json().then(function (movies) {
+      //       console.log(movies)
+      //   })
+    // })
         // .searchID = movies.data.id;
 //
 
@@ -98,14 +103,13 @@ $('#saveChanges').click(function (e) {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({edit}),
+            body: JSON.stringify(edit),
 
         };
-        console.log(edit);
 
-        fetch(movieApiUrl, edit).then(function (response) {
+        fetch(movieApiUrl, patchMethod).then(function (response) {
             console.log(response);
-           console.log(data[0]);
+           // console.log(data[0]);
         })
 
     })
