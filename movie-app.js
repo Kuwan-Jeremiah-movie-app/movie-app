@@ -82,7 +82,14 @@ $('#saveChanges').click(function (e) {
         "genre": document.querySelector('#addGenreModal').value,
         "year": document.querySelector('#addYearModal').value
     }
-    // let searchID = movieApiUrl.data.id;
+
+    const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
+      fetch(movieApiUrl).then(function (response) {
+        response.json().then(function (movies) {
+            console.log(movies)
+        })
+    })
+        // .searchID = movies.data.id;
 //
 
         const movieObj = {"title": title, "rating": rating};
@@ -95,12 +102,7 @@ $('#saveChanges').click(function (e) {
 
         };
         console.log(edit);
-    const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
-    fetch(movieApiUrl).then(function (response) {
-        response.json().then(function (movies) {
-            console.log(movies)
-        })
-    })
+
         fetch(movieApiUrl, edit).then(function (response) {
             console.log(response);
            console.log(data[0]);
