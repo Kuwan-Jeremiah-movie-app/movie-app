@@ -14,11 +14,13 @@ fetch(movieApiUrl).then(function (response) {
         console.log(movies)
     })
 })
-
+let title = $("#addMovie").val();
+let rating = $("#addRating").val()
 const movieObj = {
-    "Title ": $("#addMovie").val(),
-    "Rating ": $("#addRating").val()
+    "Title ": title,
+    "Rating ": rating
 };
+console.log(movieObj);
 const options = {
     method: 'POST',
     headers: {
@@ -29,21 +31,20 @@ const options = {
 
 
 $("#addNew").click(function(){
-
     options
 })
 
-$.ajax(movieApiUrl).done(function (data) {
-    data.forEach(function (movie) {
-        let movieHtml = "<tr>"
-        movieHtml += `<td>Movie Title: <br>${movie.title.toUpperCase()}</br></td>`
-        movieHtml += `<td>Movie Genre: <br>${movie.genre}</td>`
-        movieHtml += `<td>Movie Rating: <br>${movie.rating}</br></td>`
-        movieHtml += `<td>Movie Year: <br>${movie.year}</br></td>`
-        movieHtml += `<td>Movie Graphics: <br> <img src='${movie.poster}' style="width: 100px; height: 100px"></td></tr>`
-        $("#movies").append(movieHtml)
-    })
-})
+// $.ajax(movieApiUrl).done(function (data) {
+//     data.forEach(function (movie) {
+//         let movieHtml = "<tr>"
+//         movieHtml += `<td>Movie Title: <br>${movie.title.toUpperCase()}</br></td>`
+//         movieHtml += `<td>Movie Genre: <br>${movie.genre}</td>`
+//         movieHtml += `<td>Movie Rating: <br>${movie.rating}</br></td>`
+//         movieHtml += `<td>Movie Year: <br>${movie.year}</br></td>`
+//         movieHtml += `<td>Movie Graphics: <br> <img src='${movie.poster}' style="width: 100px; height: 100px"></td></tr>`
+//         $("#movies").append(movieHtml)
+//     })
+// })
 
 
 
