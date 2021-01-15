@@ -70,10 +70,14 @@ $.ajax(movieApiUrl).done(function (data) {
 // function editMovie(e){
 //     e.preventDefault();
 //
-$(".movieModal button").on("click", function(){
-    console.log(this);
+$("#exampleModal").on("shown.bs.model", function (e) {
+    let clickedButton = e.relatedTarget;
+    let movieId = clickedButton.getAttribute("data-movie");
     // console.log("The movie id is: " + movieId)
+    console.log(movieId);
+    $('#exampleModal button#saveChanges').attr('data-movie', movieId)
 })
+
 // // //update radio buttons
 $('#saveChanges').click(function (e) {
     e.preventDefault();
@@ -85,34 +89,34 @@ $('#saveChanges').click(function (e) {
         "genre": document.querySelector('#addGenreModal').value,
         "rating": document.querySelector('#addRatingModal').value,
         "year": document.querySelector('#addYearModal').value,
-        "id": document.querySelector('').getAttribute('id')
+        "id": document.querySelector('#exampleModal').getAttribute('id')
     }
 
     // const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
-      // fetch(movieApiUrl).then(function (response) {
-      //   response.json().then(function (movies) {
-      //       console.log(movies)
-      //   })
+    // fetch(movieApiUrl).then(function (response) {
+    //   response.json().then(function (movies) {
+    //       console.log(movies)
+    //   })
     // })
-        // .searchID = movies.data.id;
+    // .searchID = movies.data.id;
 //
 
-        const movieObj = {"title": title, "rating": rating};
-        const patchMethod = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(edit),
+    const movieObj = {"title": title, "rating": rating};
+    const patchMethod = {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(edit),
 
-        };
+    };
 
-        fetch(movieApiUrl, patchMethod).then(function (response) {
-            console.log(response);
-           // console.log(data[0]);
-        })
-
+    fetch(movieApiUrl, patchMethod).then(function (response) {
+        console.log(response);
+        // console.log(data[0]);
     })
+
+})
 //
 // $("#edit").click(function () {
 //
