@@ -14,18 +14,15 @@ fetch(movieApiUrl).then(function (response) {
         console.log(movies)
     })
 })
-
 let title = $("#addMovie").val();
 let rating = $("#addRating").val()
 // const movieObj = {
 //     "Title ": title,
 //     "Rating ": rating
 // };
-
 const options = {
     method: 'POST',
 }
-
 // console.log(movieObj);
 $("#addNew").click(function (e) {
     e.preventDefault();
@@ -50,7 +47,6 @@ $("#addNew").click(function (e) {
         })
     })
 })
-
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
         let movieHtml = "<div> <div class=\"card \" style=\"width: 18rem;\">";
@@ -59,39 +55,35 @@ $.ajax(movieApiUrl).done(function (data) {
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
         movieHtml += `<p>Year: <br>${movie.year}</p></div>`
-        movieHtml += `<span class="movieModal"><button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
+        movieHtml += `<button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
         Edit Movie
-    </button></span><br><br><br></div>`
+    </button><br><br><br></div>`
         $("#movies").append(movieHtml)
     })
-
-
 });
 // function editMovie(e){
 //     e.preventDefault();
 //
-$("#exampleModal").on("shown.bs.model", function (e) {
+$('#exampleModal').on('shown.bs.modal', function (e) {
     let clickedButton = e.relatedTarget;
-    let movieId = clickedButton.getAttribute("data-movie");
-    // console.log("The movie id is: " + movieId)
+    let movieId = clickedButton.getAttribute('data-movie');
+    // This is the id of the movie. So now, I can set this in the form.
     console.log(movieId);
-    $('#exampleModal button#saveChanges').attr('data-movie', movieId)
+    // Find the modal, and set this data attribute
+    $('#exampleModal button#saveChanges').attr('data-movie', movieId);
 })
-
 // // //update radio buttons
 $('#saveChanges').click(function (e) {
     e.preventDefault();
-
-//     // let movieTitleEditor = $("#addMovie").val();
-//     // let movieRateEditor = $("#addRating").val();
+    // let movieTitleEditor = $("#addMovie").val();
+    // let movieRateEditor = $("#addRating").val();
     const edit = {
         "title": document.querySelector('#addMovieModal').value,
         "genre": document.querySelector('#addGenreModal').value,
         "rating": document.querySelector('#addRatingModal').value,
         "year": document.querySelector('#addYearModal').value,
-        "id": document.querySelector('#exampleModal').getAttribute('id')
+        "id": document.querySelector('#saveChanges').getAttribute('data-movie')
     }
-
     // const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
     // fetch(movieApiUrl).then(function (response) {
     //   response.json().then(function (movies) {
@@ -99,8 +91,6 @@ $('#saveChanges').click(function (e) {
     //   })
     // })
     // .searchID = movies.data.id;
-//
-
     const movieObj = {"title": title, "rating": rating};
     const patchMethod = {
         method: 'PATCH',
@@ -108,14 +98,11 @@ $('#saveChanges').click(function (e) {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(edit),
-
     };
-
-    fetch(movieApiUrl, patchMethod).then(function (response) {
+    fetch(movieApiUrl + "/"+ edit.id, patchMethod).then(function (response) {
         console.log(response);
         // console.log(data[0]);
     })
-
 })
 //
 // $("#edit").click(function () {
@@ -128,4 +115,3 @@ $('#saveChanges').click(function (e) {
 //         })
 //     });
 // })
-
