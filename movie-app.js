@@ -14,26 +14,28 @@ fetch(movieApiUrl).then(function (response) {
         console.log(movies)
     })
 })
-<<<<<<< HEAD
+
 let title = $("#addMovie").val();
 let rating = $("#addRating").val()
-const movieObj = {
-    "Title ": title,
-    "Rating ": rating
-};
-console.log(movieObj);
+// const movieObj = {
+//     "Title ": title,
+//     "Rating ": rating
+// };
+
 const options = {
     method: 'POST',
-=======
+}
 
 // console.log(movieObj);
-$("#addNew").click(function () {
+$("#addNew").click(function (e) {
+    e.preventDefault();
     let title = $("#addMovie").val()
     let rating = $("#addRating").val()
     const movieObj = {
         "title": title,
         "rating": rating
     };
+    console.log(movieObj);
     const options = {
         method: 'POST',
         headers: {
@@ -48,52 +50,52 @@ $("#addNew").click(function () {
         })
     })
 })
-$("#movies").children().click(function(){
-
-let movieTitleEditor=$("#addMovie").val();
-let movieRateEditor=$("#addRating").val();
-const editMovies={
-    method: "PATCH",
->>>>>>> e4e292802bd8026ab2cd308f46870844b5502a3e
-    headers: {
-        'Content-Type':'application/json',
-    },
-    body:JSON.stringify({title: movieTitleEditor}),
-    body:JSON.stringify({rating: movieRateEditor})
-};
-<<<<<<< HEAD
-
-
-$("#addNew").click(function(){
-    options
-})
-
-// $.ajax(movieApiUrl).done(function (data) {
-//     data.forEach(function (movie) {
-//         let movieHtml = "<tr>"
-//         movieHtml += `<td>Movie Title: <br>${movie.title.toUpperCase()}</br></td>`
-//         movieHtml += `<td>Movie Genre: <br>${movie.genre}</td>`
-//         movieHtml += `<td>Movie Rating: <br>${movie.rating}</br></td>`
-//         movieHtml += `<td>Movie Year: <br>${movie.year}</br></td>`
-//         movieHtml += `<td>Movie Graphics: <br> <img src='${movie.poster}' style="width: 100px; height: 100px"></td></tr>`
-//         $("#movies").append(movieHtml)
-//     })
-// })
-=======
-})
 
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
-        let movieHtml = "<tr>"
-        movieHtml += `<td>Movie Title: <br>${movie.title.toUpperCase()}</br></td>`
-        movieHtml += `<td>Movie Genre: <br>${movie.genre}</td>`
-        movieHtml += `<td>Movie Rating: <br>${movie.rating}</br></td>`
-        movieHtml += `<td>Movie Year: <br>${movie.year}</br></td>`
-        movieHtml += `<td>Movie Graphics: <br> <img src='${movie.poster}' style="width: 100px; height: 100px" alt=""></td></tr>`
+        let movieHtml = "<div> <div class=\"card\" style=\"width: 18rem;\">";
+        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" alt="">`
+        movieHtml += `<div class="card-body">${movie.title.toUpperCase()}</div>`
+        movieHtml += `<h5>${movie.genre}</h5>`
+        movieHtml += `<p>Rating: ${movie.rating}</p>`
+        movieHtml += `<p>Year: <br>${movie.year}</p></div>`
+        movieHtml += `  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Edit Movie
+    </button></div`
         $("#movies").append(movieHtml)
     })
-})
->>>>>>> e4e292802bd8026ab2cd308f46870844b5502a3e
-
-
+});
+// function editMovie(e){
+//     e.preventDefault();
+//
+//
+// // //update radio buttons
+// // let selected = $('input:radio[name=movieTitle]').click(function () {
+// //     console.log($(this.movie.title))
+//     // let movieTitleEditor = $("#addMovie").val();
+//     // let movieRateEditor = $("#addRating").val();
+//     // const movieObj = {
+//     //     "title": movieTitleEditor,
+//     //     "rating": movieRateEditor
+//     })
+// //
+//     const patchMethod = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({title: movieTitleEditor}),
+//         body: JSON.stringify({rating: movieRateEditor})
+//     };
+//
+// $("#edit").click(function () {
+//
+//         fetch(movieApiUrl +  patchMethod).then(function (response) {
+//             response.json().then(function (toEdit) {
+//                 console.log(movies)
+//             })
+//
+//         })
+//     });
+// })
 
