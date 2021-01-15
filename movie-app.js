@@ -72,7 +72,8 @@ $.ajax(movieApiUrl).done(function (data) {
 //
 //
 // // //update radio buttons
-$('#saveChanges').click(function () {
+$('#saveChanges').click(function (e) {
+    e.preventDefault();
 
 //     // let movieTitleEditor = $("#addMovie").val();
 //     // let movieRateEditor = $("#addRating").val();
@@ -81,20 +82,31 @@ $('#saveChanges').click(function () {
         "genre": document.querySelector('#addGenreModal').value,
         "year": document.querySelector('#addYearModal').value
     }
+    // let searchID = movieApiUrl.data.id;
 //
-    const patchMethod = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({edit}),
 
-    };
-    console.log(edit);
-    fetch(movieApiUrl,edit).then(function (response){
-        console.log(response);
+        const movieObj = {"title": title, "rating": rating};
+        const patchMethod = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({edit}),
+
+        };
+        console.log(edit);
+    const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
+    fetch(movieApiUrl).then(function (response) {
+        response.json().then(function (movies) {
+            console.log(movies)
+        })
     })
-})
+        fetch(movieApiUrl, edit).then(function (response) {
+            console.log(response);
+           console.log(data[0]);
+        })
+
+    })
 //
 // $("#edit").click(function () {
 //
