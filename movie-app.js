@@ -37,7 +37,19 @@ $("#addNew").click(function () {
         })
     })
 })
+$("#movies").children().click(function(){
 
+let movieTitleEditor=$("#addMovie").val();
+let movieRateEditor=$("#addRating").val();
+const editMovies={
+    method: "PATCH",
+    headers: {
+        'Content-Type':'application/json',
+    },
+    body:JSON.stringify({title: movieTitleEditor}),
+    body:JSON.stringify({rating: movieRateEditor})
+};
+})
 
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
