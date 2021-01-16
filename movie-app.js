@@ -61,15 +61,15 @@ $("#addNew").click(function (e) {
 })
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
-        let movieHtml = "<div> <div class=\"card \" style=\"width: 18rem;\">";
-        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" alt="">`
+        let movieHtml = "<div class='float-left'> <div class=\"card \" style=\"width: 18rem;\">";
+        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" alt="" class="d-flex justify-content-between">`
         movieHtml += `<div class="card-body">${movie.title.toUpperCase()}</div>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
-        movieHtml += `<p>Year: <br>${movie.year}</p></div>`
+        movieHtml += `<p>Year: ${movie.year}</p>`
         movieHtml += `<button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
         Edit Movie
-    </button><br><br><br></div>`
+    </button></div></div>`
 
         $("#movies").append(movieHtml)
 
