@@ -58,12 +58,34 @@ $.ajax(movieApiUrl).done(function (data) {
         movieHtml += `<button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
         Edit Movie
     </button><br><br><br></div>`
+
         $("#movies").append(movieHtml)
+
+
     })
+
 });
 // function editMovie(e){
 //     e.preventDefault();
 //
+// $('#close').on('hide.bs.modal',$.ajax(movieApiUrl).done(function (data) {
+//     data.forEach(function (movie) {
+//         let movieHtml = "<div> <div class=\"card \" style=\"width: 18rem;\">";
+//         movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" alt="">`
+//         movieHtml += `<div class="card-body">${movie.title.toUpperCase()}</div>`
+//         movieHtml += `<h5>${movie.genre}</h5>`
+//         movieHtml += `<p>Rating: ${movie.rating}</p>`
+//         movieHtml += `<p>Year: <br>${movie.year}</p></div>`
+//         movieHtml += `<button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
+//         Edit Movie
+//     </button><br><br><br></div>`
+//
+//         $("#movies").append(movieHtml)
+//
+//
+//     })
+//
+// }));
 $('#exampleModal').on('shown.bs.modal', function (e) {
     let clickedButton = e.relatedTarget;
     let movieId = clickedButton.getAttribute('data-movie');
@@ -99,7 +121,7 @@ $('#saveChanges').click(function (e) {
         },
         body: JSON.stringify(edit),
     };
-    fetch(movieApiUrl + "/"+ edit.id, patchMethod).then(function (response) {
+    fetch(movieApiUrl + "/" + edit.id, patchMethod).then(function (response) {
         console.log(response);
         // console.log(data[0]);
     })
