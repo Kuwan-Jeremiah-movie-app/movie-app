@@ -5,6 +5,7 @@
     <title>Movie Palace</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="movie-app.css">
 </head>
 <body>
 <div id="loader"> Loading ....</div>
@@ -18,13 +19,15 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="addGroup">
         <label>Movie Title</label><br>
-        <input id="addMovie" placeholder="Add Title" style="height: 20px;">
+        <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">
         <lablel>Movie Rating</lablel>
-        <input id="addRating" placeholder="Add Rating" style="height: 20px;">
-        <lablel>Movie Rating</lablel>
-        <input id="addGenre" placeholder="Add Genre" style="height: 20px;">
+        <input id="addRating" placeholder="Add Rating" style="height: 20px;" name="required">
+        <lablel>Movie Genre</lablel>
+        <input id="addGenre" placeholder="Add Genre" style="height: 20px;" name="required">
+        <lablel>Movie Year</lablel>
+        <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">
         <!--    buttons-->
         <button id="addNew">Add</button>
     </div>
