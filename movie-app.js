@@ -16,6 +16,8 @@ fetch(movieApiUrl).then(function (response) {
 })
 let title = $("#addMovie").val();
 let rating = $("#addRating").val()
+let genre = $("#addGenre").val()
+let year = $("#addYear").val()
 // const movieObj = {
 //     "Title ": title,
 //     "Rating ": rating
@@ -26,26 +28,36 @@ const options = {
 // console.log(movieObj);
 $("#addNew").click(function (e) {
     e.preventDefault();
-    let title = $("#addMovie").val()
-    let rating = $("#addRating").val()
-    const movieObj = {
-        "title": title,
-        "rating": rating
-    };
-    console.log(movieObj);
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieObj),
-    };
-    fetch(movieApiUrl, options).then(function (response) {
+    if(title === "" || rating === "" || genre === "" || year === ""){
+        $("input").addClass("required")
+    } else {
+
+        let title = $("#addMovie").val()
+        let rating = $("#addRating").val()
+        let genre = $("#addGenre").val()
+        let year = $("#addYear").val()
+
+        const movieObj = {
+            "title": title,
+            "rating": rating,
+            "genre": genre,
+            "year": year
+        };
+        console.log(movieObj);
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieObj),
+        };
+        fetch(movieApiUrl, options).then(function (response) {
 // console.log(response)
-        response.json().then(function (newMovie) {
-            console.log(newMovie)
+            response.json().then(function (newMovie) {
+                console.log(newMovie)
+            })
         })
-    })
+    }
 })
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
@@ -97,34 +109,36 @@ $('#exampleModal').on('shown.bs.modal', function (e) {
 // // //update radio buttons
 $('#saveChanges').click(function (e) {
     e.preventDefault();
-    // let movieTitleEditor = $("#addMovie").val();
-    // let movieRateEditor = $("#addRating").val();
-    const edit = {
-        "title": document.querySelector('#addMovieModal').value,
-        "genre": document.querySelector('#addGenreModal').value,
-        "rating": document.querySelector('#addRatingModal').value,
-        "year": document.querySelector('#addYearModal').value,
-        "id": document.querySelector('#saveChanges').getAttribute('data-movie')
+    if(title === "" || rating === "" || genre === "" || year === ""){
+        $("input").addClass("required")
+    } else {
+        const edit = {
+            "title": document.querySelector('#addMovieModal').value,
+            "genre": document.querySelector('#addGenreModal').value,
+            "rating": document.querySelector('#addRatingModal').value,
+            "year": document.querySelector('#addYearModal').value,
+            "id": document.querySelector('#saveChanges').getAttribute('data-movie')
+        }
+        // const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
+        // fetch(movieApiUrl).then(function (response) {
+        //   response.json().then(function (movies) {
+        //       console.log(movies)
+        //   })
+        // })
+        // .searchID = movies.data.id;
+        const movieObj = {"title": title, "rating": rating, "genre": genre, "year": year};
+        const patchMethod = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(edit),
+        };
+        fetch(movieApiUrl + "/" + edit.id, patchMethod).then(function (response) {
+            console.log(response);
+            // console.log(data[0]);
+        })
     }
-    // const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
-    // fetch(movieApiUrl).then(function (response) {
-    //   response.json().then(function (movies) {
-    //       console.log(movies)
-    //   })
-    // })
-    // .searchID = movies.data.id;
-    const movieObj = {"title": title, "rating": rating};
-    const patchMethod = {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(edit),
-    };
-    fetch(movieApiUrl + "/" + edit.id, patchMethod).then(function (response) {
-        console.log(response);
-        // console.log(data[0]);
-    })
 })
 //
 // $("#edit").click(function () {
