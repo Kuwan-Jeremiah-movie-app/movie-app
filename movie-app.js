@@ -28,15 +28,13 @@ const options = {
 // console.log(movieObj);
 $("#addNew").click(function (e) {
     e.preventDefault();
+    let title = $("#addMovie").val()
+    let rating = $("#addRating").val()
+    let genre = $("#addGenre").val()
+    let year = $("#addYear").val()
     if(title === "" || rating === "" || genre === "" || year === ""){
-        $("input").addClass("required")
+        $(".addGroup input").addClass("required")
     } else {
-
-        let title = $("#addMovie").val()
-        let rating = $("#addRating").val()
-        let genre = $("#addGenre").val()
-        let year = $("#addYear").val()
-
         const movieObj = {
             "title": title,
             "rating": rating,
@@ -57,7 +55,9 @@ $("#addNew").click(function (e) {
                 console.log(newMovie)
             })
         })
+
     }
+
 })
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
@@ -110,7 +110,7 @@ $('#exampleModal').on('shown.bs.modal', function (e) {
 $('#saveChanges').click(function (e) {
     e.preventDefault();
     if(title === "" || rating === "" || genre === "" || year === ""){
-        $("input").addClass("required")
+        $(".modal-body input").addClass("required")
     } else {
         const edit = {
             "title": document.querySelector('#addMovieModal').value,
