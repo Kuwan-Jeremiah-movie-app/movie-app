@@ -69,6 +69,9 @@ $.ajax(movieApiUrl).done(function (data) {
         movieHtml += `<p>Year: ${movie.year}</p>`
         movieHtml += `<button type="button" class="btn btn-primary" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#exampleModal">
         Edit Movie
+    </button>`
+        movieHtml += `<button type="button" class="btn red btn-danger " id="delete"  data-movie="${movie.id}" data-target="deleteMovie">
+        Delete Movie
     </button></div></div>`
 
         $("#movies").append(movieHtml)
@@ -140,6 +143,32 @@ $('#saveChanges').click(function (e) {
         })
     }
 })
+
+$('#deleteMovie').click(function (e) {
+    e.preventDefault();
+    let edit = {
+        "title": document.querySelector('#addMovieModal').value,
+        "genre": document.querySelector('#addGenreModal').value,
+        "rating": document.querySelector('#addRatingModal').value,
+        "year": document.querySelector('#addYearModal').value,
+        "id": document.querySelector('#saveChanges').getAttribute('data-movie')
+    }
+
+
+// Make the HTTP Delete call using fetch api
+    fetch(movieApiUrl + "/" + edit.id, {
+        method: 'DELETE', // Method itself
+        // headers: {
+        //     'Content-type': 'application/json; charset=UTF-8' // Indicates the content
+        // },
+        // body: JSON.stringify(edit),
+
+        // No need to have body, because we don't send nothing to the server.
+    })
+        .then(res => res.text())
+        .then(res => console.log(res))
+})
+
 //
 // $("#edit").click(function () {
 //
