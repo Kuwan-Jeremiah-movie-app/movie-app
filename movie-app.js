@@ -25,7 +25,7 @@ $("#addNew").click(function (e) {
     let rating = $("#addRating").val()
     let genre = $("#addGenre").val()
     let year = $("#addYear").val()
-    let poster =$("#addPoster").val()
+    let poster = $("#addPoster").val()
     if (title === "" || rating === "" || genre === "" || year === "" || poster === "") {
         $(".addGroup input").addClass("required")
     } else {
@@ -55,8 +55,10 @@ $("#addNew").click(function (e) {
 })
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
-        let movieHtml = ` <div class="card float-left" style="width: 18rem">`;
-        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" class="poster d-flex justify-content-between" alt="poster">`
+        let movieHtml = `  <div class="card card-flip h-100"> <div class="card-front float-left" style="width: 18rem">`;
+        movieHtml += `<img src='${movie.poster}' style="width: 100%; height: 100%" class="poster d-flex justify-content-between" alt="poster">
+        </div>`
+        movieHtml += `<div class="card-back float-left" style="width: 18rem">`;
         movieHtml += `<h3 class="card-body">${movie.title.toUpperCase()}</h3>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
@@ -66,7 +68,7 @@ $.ajax(movieApiUrl).done(function (data) {
     </button>`
         movieHtml += `<button type="button" class="btn btn-danger" id="${movie.id}" data-toggle="modal"  data-movie="${movie.id}" data-target="#deleteModal">
         Delete Movie
-    </button></div></div>`
+    </button></div></div></div>`
         $("#movies").append(movieHtml)
     })
 });
@@ -120,7 +122,7 @@ $('#deleteModal').on('shown.bs.modal', function (e) {
 })
 $("#confirmDelete").click(function (e) {
     e.preventDefault();
-    let remove ={
+    let remove = {
         "title": document.querySelector('#addMovieModal').value,
         "genre": document.querySelector('#addGenreModal').value,
         "rating": document.querySelector('#addRatingModal').value,
@@ -137,7 +139,7 @@ $("#confirmDelete").click(function (e) {
         // body: JSON.stringify(remove),
     };
 // Make the HTTP Delete call using fetch api
-    fetch(movieApiUrl+"/"+ remove.id, deleteMethod)
+    fetch(movieApiUrl + "/" + remove.id, deleteMethod)
         .then(response => response.json())
         .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
         .catch(err => console.log(err)) // Do something with the error
