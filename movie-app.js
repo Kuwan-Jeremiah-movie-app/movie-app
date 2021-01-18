@@ -25,14 +25,16 @@ $("#addNew").click(function (e) {
     let rating = $("#addRating").val()
     let genre = $("#addGenre").val()
     let year = $("#addYear").val()
-    if (title === "" || rating === "" || genre === "" || year === "") {
+    let poster =$("#addPoster").val()
+    if (title === "" || rating === "" || genre === "" || year === "" || poster === "") {
         $(".addGroup input").addClass("required")
     } else {
         const movieObj = {
             "title": title,
             "rating": rating,
             "genre": genre,
-            "year": year
+            "year": year,
+            "poster": poster
         };
         console.log(movieObj);
         const options = {
@@ -54,7 +56,7 @@ $("#addNew").click(function (e) {
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
         let movieHtml = ` <div class="card float-left" style="width: 18rem">`;
-        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" class="d-flex justify-content-between" alt="poster">`
+        movieHtml += `<img src='${movie.poster}' style="width: 100px; height: 100px" class="poster d-flex justify-content-between" alt="poster">`
         movieHtml += `<h3 class="card-body">${movie.title.toUpperCase()}</h3>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
@@ -86,6 +88,7 @@ $('#saveChanges').click(function (e) {
         "rating": document.querySelector('#addRatingModal').value,
         "year": document.querySelector('#addYearModal').value,
         "id": document.querySelector('#saveChanges').getAttribute('data-movie')
+
     }
     const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
     // fetch(movieApiUrl).then(function (response) {
