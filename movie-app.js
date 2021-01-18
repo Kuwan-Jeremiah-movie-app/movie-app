@@ -87,8 +87,8 @@ $('#saveChanges').click(function (e) {
         "genre": document.querySelector('#addGenreModal').value,
         "rating": document.querySelector('#addRatingModal').value,
         "year": document.querySelector('#addYearModal').value,
-        "id": document.querySelector('#saveChanges').getAttribute('data-movie')
-
+        "id": document.querySelector('#saveChanges').getAttribute('data-movie'),
+        "poster": document.querySelector('#addPosterModal').value
     }
     const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
     // fetch(movieApiUrl).then(function (response) {
@@ -125,7 +125,8 @@ $("#confirmDelete").click(function (e) {
         "genre": document.querySelector('#addGenreModal').value,
         "rating": document.querySelector('#addRatingModal').value,
         "year": document.querySelector('#addYearModal').value,
-        "id": document.querySelector('#confirmDelete').getAttribute('data-movie')
+        "id": document.querySelector('#confirmDelete').getAttribute('data-movie'),
+        "poster": document.querySelector('#addPosterModal').value
     }
 
     const deleteMethod = {
