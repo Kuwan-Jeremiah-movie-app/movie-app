@@ -5,7 +5,8 @@
     <title>Movie Palace</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="movie-app.css">
+    <link rel="stylesheet" href="movie.css">
+
 </head>
 <body>
 <div id="loader"> Loading ....</div>
@@ -14,89 +15,95 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div id="movies">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="addGroup">
-        <label>Movie Title</label><br>
-        <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">
-        <lablel>Movie Rating</lablel>
-        <input id="addRating" placeholder="Add Rating" style="height: 20px;" name="required">
-        <lablel>Movie Genre</lablel>
-        <input id="addGenre" placeholder="Add Genre" style="height: 20px;" name="required">
-        <lablel>Movie Year</lablel>
-        <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">
-        <lablel>Movie poster</lablel>
-        <input id="addPoster" placeholder="Add Poster Url" style="height: 20px;" name="required">
-        <!--    buttons-->
-        <button id="addNew">Add</button>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Movie?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-6">
-                            <label>Movie Title</label>
-                            <input id="addMovieModal" placeholder="Edit Title" style="height: 20px;"
-                                   spellcheck="true"><br>
-                            <lablel>Movie Rating</lablel>
-                            <input id="addRatingModal" placeholder="Edit Rating" style="height: 20px;"><br>
-                            <lablel>Movie Genre</lablel>
-                            <input id="addGenreModal" placeholder="Edit Genre" style="height: 20px;"><br>
-                            <lablel>Movie Year</lablel>
-                            <input id="addYearModal" placeholder="Edit Year" style="height: 20px;">
-                            <lablel>Movie poster</lablel>
-                            <input id="addPosterModal" placeholder="Add Poster Url" style="height: 20px;" name="required">
-                        </div>
+                    <div  id="movies">
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveChanges" data-movie="">Save changes</button>
-                </div>
             </div>
         </div>
     </div>
-<!--    Delete modal-->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete Title?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h3>Are you sure you want to delete this title?</h3>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" onclick="window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
-                    <button type="button"  class="btn btn-danger" id="confirmDelete" data-movie="">Delete</button>
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+<div class="addGroup">
+    <label>Movie Title</label><br>
+    <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">
+    <lablel>Movie Rating</lablel>
+    <input id="addRating" placeholder="Add Rating" style="height: 20px;" name="required">
+    <lablel>Movie Genre</lablel>
+    <input id="addGenre" placeholder="Add Genre" style="height: 20px;" name="required">
+    <lablel>Movie Year</lablel>
+    <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">
+    <lablel>Movie poster</lablel>
+    <input id="addPoster" placeholder="Add Poster Url" style="height: 20px;" name="required">
+    <!--    buttons-->
+    <button id="addNew">Add</button>
+</div>
 
-    <hr>
-    <footer>
-        <small>
-            Made by Jeremiah Baham & Kuwan Barnes
-        </small>
-    </footer>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Movie?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Movie Title</label>
+                        <input id="addMovieModal" placeholder="Edit Title" style="height: 20px;"
+                               spellcheck="true"><br>
+                        <lablel>Movie Rating</lablel>
+                        <input id="addRatingModal" placeholder="Edit Rating" style="height: 20px;"><br>
+                        <lablel>Movie Genre</lablel>
+                        <input id="addGenreModal" placeholder="Edit Genre" style="height: 20px;"><br>
+                        <lablel>Movie Year</lablel>
+                        <input id="addYearModal" placeholder="Edit Year" style="height: 20px;">
+                        <lablel>Movie poster</lablel>
+                        <input id="addPosterModal" placeholder="Add Poster Url" style="height: 20px;" name="required">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="close" onclick="window.location.reload()" data-dismiss="modal"
+                        aria-hidden="true">Close
+                </button>
+                <button type="button" class="btn btn-primary" id="saveChanges" data-movie="">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--    Delete modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Title?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Are you sure you want to delete this title?</h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="window.location.reload()" class="close" data-dismiss="modal"
+                        aria-hidden="true">Close
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmDelete" data-movie="">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+<footer>
+    <small>
+        Made by Jeremiah Baham & Kuwan Barnes
+    </small>
+</footer>
 </div>
 <script src="jquery-2.2.4.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
