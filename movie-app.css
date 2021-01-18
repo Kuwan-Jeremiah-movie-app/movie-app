@@ -4,3 +4,8 @@
 .card{
     margin: 25px;
 }
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}

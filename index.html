@@ -11,7 +11,7 @@
 <div id="loader"> Loading ....</div>
 <div>
     <h1>Movie Palace</h1>
-    <div class="container-fluid d-flex">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-12">
                 <div id="movies">
@@ -29,13 +29,9 @@
         <lablel>Movie Year</lablel>
         <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">
         <!--    buttons-->
-        <button id="addNew">Add</button>
+        <button id="addNew" onclick="window.location.reload()">Add</button>
     </div>
-    <!-- Button trigger modal -->
-    <!--    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
-    <!--        Edit Movie-->
-    <!--    </button>-->
-    <!-- Button trigger modal -->
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -69,6 +65,28 @@
             </div>
         </div>
     </div>
+<!--    Delete modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Title?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Are you sure you want to delete this title?</h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="window.location.reload()" class="close" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete" data-movie="">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <hr>
     <footer>
         <small>
