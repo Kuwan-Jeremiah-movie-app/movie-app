@@ -10,18 +10,32 @@
 </head>
 <body>
 <div id="loader"> Loading ....</div>
-<div>
-    <h1>Movie Palace</h1>
+<div class="container">
+    <div>Navbar</div>
+    <div>
+        <h1>Movie Palace</h1>
+    </div>
+    <div>
+        <form>
+            <div class="form-group">
+                <input type="text" id="inputValue">
+                <button type="submit" id="search"> Search a movie</button>
+            </div>
+
+
+        </form>
+    </div>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                    <div  id="movies">
-                    </div>
+                <div id="movies">
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <div class="addGroup">
     <label>Movie Title</label><br>
     <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">

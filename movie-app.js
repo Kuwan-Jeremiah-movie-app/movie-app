@@ -8,6 +8,13 @@ document.onreadystatechange = function () {
     }
 };
 //fetch
+const buttonElement = document.querySelector('#search');
+const inputElement = document.querySelector('#inputValue');
+buttonElement.onclick = function (e){
+    e.preventDefault();
+    const value = inputElement.value;
+    console.log(value);
+}
 const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
 fetch(movieApiUrl).then(function (response) {
     response.json().then(function (movies) {
