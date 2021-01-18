@@ -1,1 +1,4 @@
-const TMDB_MOVIE_API = "593029ea094bfad7cdc3c07e0c27391c"
+.idea/*
+*.iml
+.DS_STORE
+keys.js

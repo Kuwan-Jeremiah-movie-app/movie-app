@@ -7,18 +7,43 @@ document.onreadystatechange = function () {
         document.querySelector("body").style.visibility = "visible";
     }
 };
-//fetch
+//search input and button
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
-buttonElement.onclick = function (e){
+
+//create movie container
+function createMovieContainer() {
+    const movieElement = document.createElement('div');
+    movieElement.setAttribute('class', 'movie');
+
+    const movieTemplate = `
+  <section class="section">
+  <img src="https//image.tmdb.org/t/p/w500/rZd0y1X1Gw4t5B3f01Qzj8DYY66.jpg" alt="" data-movie-id="" </section> <div class="content"> <p id="content-close">X</p>
+`
+}
+
+
+//search onclick function
+buttonElement.onclick = function (e) {
     e.preventDefault();
     const value = inputElement.value;
-    console.log(value);
+    const searchApiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${value}`;
+
+    fetch(searchApiUrl)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log("data: ", data);
+        })
+        .catch((error) => {
+            console.log("Error: ", error)
+        });
+    console.log("Value: ", value);
 }
+//fetch
 const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
 fetch(movieApiUrl).then(function (response) {
     response.json().then(function (movies) {
-        console.log(movies)
+        // console.log(movies)
     })
 })
 let title = $("#addMovie").val();
