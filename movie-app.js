@@ -1,4 +1,5 @@
 document.onreadystatechange = function () {
+
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
         document.querySelector("#loader").style.visibility = "visible";
@@ -27,7 +28,10 @@ function createMovieContainer(movies) {
     movieElement.setAttribute('class', 'movie');
     const movieTemplate = `<section class="section">${movieSection(movies)}</section>
   <div class="content">
-  <p id="content-close">X</p>
+  <button id="content-close">X</button>
+<!--  //description -->
+<!--  //add button-->
+ 
 </div>`;
     movieElement.innerHTML = movieTemplate;
     return movieElement;
@@ -67,23 +71,30 @@ document.onclick = function (e) {
         const content = section.nextElementSibling;
         content.classList.add('content-display')
         // const path = `/movie/${movieId}/videos`;
+        console.log(movieId);
         //https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>
-        const url =  `https://themoviedb.org/3/movie${movieId}videos?api_key=${API_KEY}`;
+        const url =  `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`;
+
         //fetch movie preview
         fetch(url)
-            .then((res) => res.json())
+            .then((res) => {
+                console.log(res);
+                return res.json()})
             .then((data)=>{
                 //display preview
                 console.log('Videos: ', data);
+                content.classList.add('content-display')
             })
             .catch((error) => {
                 console.log("Error: ", error)
             });
+
     }
     if (target.id === 'content-close') {
         const content = target.parentElement; //get section
         content.classList.remove('content-display'); //content
     }
+
 }
 //fetch glitch json
 const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
