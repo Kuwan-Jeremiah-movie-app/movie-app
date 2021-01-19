@@ -53,10 +53,10 @@ buttonElement.onclick = function (e) {
     fetch(searchApiUrl)
         .then((res) => res.json())
         .then(renderSearchMovies)
-    .catch((error) => {
-        console.log("Error: ", error)
-    });
-    inputElement.value= '';
+        .catch((error) => {
+            console.log("Error: ", error)
+        });
+    inputElement.value = '';
     console.log("Value: ", value);
 }
 //fetch
@@ -66,10 +66,17 @@ fetch(movieApiUrl).then(function (response) {
 // console.log(movies)
     })
 })
-document.onclick = function(){
-    const target = event.target;
-    if(target.tagName.toLowerCase() === 'img'){
-        console.log("Hello World")
+document.onclick = function (e) {
+    const target = e.target;
+    if (target.tagName.toLowerCase() === 'img') {
+        // console.log("Hello World")
+        const section = e.target.parentElement;
+        const content = section.nextElementSibling;
+        content.classList.add('content-display')
+    }
+    if (target.id === 'content-close') {
+        const content = target.parentElement;
+        content.classList.remove('content-display');
     }
 
 }
