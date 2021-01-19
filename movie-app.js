@@ -144,10 +144,10 @@ $("#addNew").click(function (e) {
 })
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
-        let movieHtml = `  <div class="card card-flip h-100"> <div class="card-front float-left" style="width: 18rem">`;
-        movieHtml += `<img src='${movie.poster}' style="width: 100%; height: 100%" class="poster d-flex justify-content-between" alt="poster">
+        let movieHtml = `  <div class="card card-flip h-100 float-left " style="width: min-content"> <div class="card-front center" style="width: 18rem">`;
+        movieHtml += `<img src='${movie.poster}' style="width: 100%; min-height: 500px" class="poster d-flex justify-content-between" alt="poster">
 </div>`
-        movieHtml += `<div class="card-back float-left" style="width: 18rem">`;
+        movieHtml += `<div class="card card-back " style="width: 18rem">`;
         movieHtml += `<h3 class="card-body">${movie.title.toUpperCase()}</h3>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
