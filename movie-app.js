@@ -62,6 +62,18 @@ buttonElement.onclick = function (e) {
     inputElement.value = '';
     console.log("Value: ", value);
 }
+
+//iframe
+function videoIframe(video) {
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embeded/${video.key}`;
+    iframe.width = 360;
+    iframe.src = 315;
+    iframe.allowFullscreen = true;
+    return iframe;
+}
+
+
 //event delegation
 document.onclick = function (e) {
     const target = e.target;
@@ -73,17 +85,29 @@ document.onclick = function (e) {
         // const path = `/movie/${movieId}/videos`;
         console.log(movieId);
         //https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>
-        const url =  `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`;
+        const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`;
 
         //fetch movie preview
         fetch(url)
             .then((res) => {
                 console.log(res);
-                return res.json()})
-            .then((data)=>{
+                return res.json()
+            })
+            .then((data) => {
                 //display preview
                 console.log('Videos: ', data);
-                content.classList.add('content-display')
+                //loop over video array
+                const videos = data.results;
+                const length = videos.length > 3 ? 3 : videos.length;
+                const iframeContainer = document.createElement('div');
+
+                for (let i = 0; i < length; i++) {
+                    const video = videos[i]
+                    const iframe = videoIframe(videos);
+                    iframeContainer.appendChild(iframe);
+                    content.appendChild(iframeContainer)
+                }
+
             })
             .catch((error) => {
                 console.log("Error: ", error)
