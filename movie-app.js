@@ -12,7 +12,7 @@ const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
 const movieSearchable = document.querySelector('#moviesSearchable')
-
+// const imgElement = document.querySelector('img')
 //movie
 function movieSection(movies) {
     return movies.map((movie) => {
@@ -52,10 +52,11 @@ buttonElement.onclick = function (e) {
 
     fetch(searchApiUrl)
         .then((res) => res.json())
-        .then()(renderSearchMovies)
+        .then(renderSearchMovies)
     .catch((error) => {
         console.log("Error: ", error)
     });
+    inputElement.value= '';
     console.log("Value: ", value);
 }
 //fetch
@@ -65,6 +66,14 @@ fetch(movieApiUrl).then(function (response) {
 // console.log(movies)
     })
 })
+document.onclick = function(){
+    const target = event.target;
+    if(target.tagName.toLowerCase() === 'img'){
+        console.log("Hello World")
+    }
+
+}
+
 let title = $("#addMovie").val();
 let rating = $("#addRating").val()
 let genre = $("#addGenre").val()
