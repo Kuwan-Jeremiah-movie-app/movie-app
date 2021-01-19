@@ -11,8 +11,7 @@ document.onreadystatechange = function () {
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
-const movieSearchable = document.querySelector('#moviesSearchable')
-// const imgElement = document.querySelector('img')
+const movieSearchable = document.querySelector('#moviesSearchable');
 //movie
 function movieSection(movies) {
     return movies.map((movie) => {
@@ -24,7 +23,6 @@ function movieSection(movies) {
 
 //create movie container
 function createMovieContainer(movies) {
-
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
     const movieTemplate = `<section class="section">${movieSection(movies)}</section>
@@ -39,6 +37,7 @@ function createMovieContainer(movies) {
 buttonElement.onclick = function (e) {
     e.preventDefault();
     const value = inputElement.value;
+    const path = '/search/movie'
     const searchApiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${value}`;
 
     function renderSearchMovies(data) {
@@ -59,28 +58,40 @@ buttonElement.onclick = function (e) {
     inputElement.value = '';
     console.log("Value: ", value);
 }
-//fetch
+//event delegation
+document.onclick = function (e) {
+    const target = e.target;
+    if (target.tagName.toLowerCase() === 'img') {
+        const movieId = target.dataset.movieId; //save movie id into a variable
+        const section = e.target.parentElement;
+        const content = section.nextElementSibling;
+        content.classList.add('content-display')
+        // const path = `/movie/${movieId}/videos`;
+        //https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>
+        const url =  `https://themoviedb.org/3/movie${movieId}videos?api_key=${API_KEY}`;
+        //fetch movie preview
+        fetch(url)
+            .then((res) => res.json())
+            .then((data)=>{
+                //display preview
+                console.log('Videos: ', data);
+            })
+            .catch((error) => {
+                console.log("Error: ", error)
+            });
+    }
+    if (target.id === 'content-close') {
+        const content = target.parentElement; //get section
+        content.classList.remove('content-display'); //content
+    }
+}
+//fetch glitch json
 const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
 fetch(movieApiUrl).then(function (response) {
     response.json().then(function (movies) {
 // console.log(movies)
     })
 })
-document.onclick = function (e) {
-    const target = e.target;
-    if (target.tagName.toLowerCase() === 'img') {
-        // console.log("Hello World")
-        const section = e.target.parentElement;
-        const content = section.nextElementSibling;
-        content.classList.add('content-display')
-    }
-    if (target.id === 'content-close') {
-        const content = target.parentElement;
-        content.classList.remove('content-display');
-    }
-
-}
-
 let title = $("#addMovie").val();
 let rating = $("#addRating").val()
 let genre = $("#addGenre").val()
@@ -160,13 +171,6 @@ $('#saveChanges').click(function (e) {
         "poster": document.querySelector('#addPosterModal').value
     }
     const movieApiUrl = "https://antique-innate-coreopsis.glitch.me/movies"
-// fetch(movieApiUrl).then(function (response) {
-//   response.json().then(function (movies) {
-//       console.log(movies)
-//   })
-// })
-// .searchID = movies.data.id;
-// const movieObj = {"title": title, "rating": rating, "genre": genre, "year": year};
     const patchMethod = {
         method: 'PATCH',
         headers: {
@@ -211,6 +215,3 @@ $("#confirmDelete").click(function (e) {
         .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
         .catch(err => console.log(err)) // Do something with the error
 })
-
-
-
