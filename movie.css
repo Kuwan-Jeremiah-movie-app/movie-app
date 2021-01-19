@@ -1,4 +1,12 @@
-
+body{
+    background-color: #666565;
+    background-image: url("https://www.transparenttextures.com/patterns/large-leather.png");
+}
+.brand{
+    background-color: #000000;
+    background-image: url("https://www.transparenttextures.com/patterns/large-leather.png");
+    color: whitesmoke;
+}
 .required{
     border-color: red;
 }

@@ -13,11 +13,12 @@ const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
 const buttonElement = document.querySelector('#search');
 const inputElement = document.querySelector('#inputValue');
 const movieSearchable = document.querySelector('#moviesSearchable');
+
 //movie
 function movieSection(movies) {
     return movies.map((movie) => {
         if (movie.poster_path) {
-            return `<img src=${IMAGE_URL + movie.poster_path} data-movie-id=${movie.id}>`;
+            return `<span><button id="addNew">+</button></span><img src=${IMAGE_URL + movie.poster_path} data-movie-id=${movie.id}> `;
         }
     })
 }
@@ -52,6 +53,7 @@ buttonElement.onclick = function (e) {
         console.log("Data: ", data);
 
     }
+
 
     fetch(searchApiUrl)
         .then((res) => res.json())
@@ -127,10 +129,6 @@ fetch(movieApiUrl).then(function (response) {
 // console.log(movies)
     })
 })
-let title = $("#addMovie").val();
-let rating = $("#addRating").val()
-let genre = $("#addGenre").val()
-let year = $("#addYear").val()
 
 $("#addNew").click(function (e) {
     e.preventDefault();
@@ -139,33 +137,32 @@ $("#addNew").click(function (e) {
     let genre = $("#addGenre").val()
     let year = $("#addYear").val()
     let poster = $("#addPoster").val()
-    if (title === "" || rating === "" || genre === "" || year === "" || poster === "") {
-        $(".addGroup input").addClass("required")
-    } else {
-        const movieObj = {
-            "title": title,
-            "rating": rating,
-            "genre": genre,
-            "year": year,
-            "poster": poster
-        };
-        console.log(movieObj);
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movieObj),
-        };
-        fetch(movieApiUrl, options).then(function (response) {
-            response.json().then(function (newMovie) {
-                console.log(newMovie)
-            })
+    // if (title === "" || rating === "" || genre === "" || year === "" || poster === "") {
+    $(".addGroup input").addClass("required")
+    // } else {
+    const movieObj = {
+        "title": title,
+        "rating": rating,
+        "genre": genre,
+        "year": year,
+        "poster": poster
+    };
+    console.log(movieObj);
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(movieObj),
+    };
+    fetch(movieApiUrl, options).then(function (response) {
+        response.json().then(function (newMovie) {
+            console.log(newMovie)
         })
-
-    }
-
+    })
 })
+
+
 $.ajax(movieApiUrl).done(function (data) {
     data.forEach(function (movie) {
         let movieHtml = `  <div class="card card-flip h-100 float-left " style="width: min-content"> <div class="card-front center" style="width: 18rem">`;
