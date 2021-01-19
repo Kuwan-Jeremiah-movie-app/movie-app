@@ -1,3 +1,9 @@
+body{
+
+    background-image: url("/img/hollywood-movie-red-carpet-background-and-city-vector-20003870.jpg");
+    width: 600px;
+    height: 563px;
+}
 .required{
     border-color: red;
 }
