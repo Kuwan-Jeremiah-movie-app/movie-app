@@ -137,6 +137,7 @@ $("#addNew").click(function (e) {
     let rating = $("#addRating").val()
     let genre = $("#addGenre").val()
     let year = $("#addYear").val()
+    let poster = $("#addPoster").val()
 
     if (title === "" || rating === "" || genre === "" || year === "") {
         $(".addGroup input").addClass("required")
@@ -249,4 +250,11 @@ $("#confirmDelete").click(function (e) {
         .then(response => response.json())
         .then(data => console.log(data)) // Manipulate the data retrieved back, if we want to do something with it
         .catch(err => console.log(err)) // Do something with the error
+})
+$("#addSearched").click(function (e){
+    e.preventDefault();
+    const searchApiUrl = 'https://api.themoviedb.org/3/search/movie?api_key='
+    fetch(searchApiUrl,{
+
+    })
 })
