@@ -11,7 +11,7 @@
 <body>
 <div id="loader"> Loading ....</div>
 <div class="container-fluid">
-    <div style="height: 150px" class="brand d-flex justify-content-between">
+    <div style="height: 100px" class="brand d-flex align-items-center justify-content-around">
         <h1>Movie Palace</h1>
 
         <div>
@@ -37,17 +37,18 @@
 
 <div class="addGroup" style="font-size: 25px; font-weight: bold">
     <label>Movie Title</label><br>
-    <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">
+    <input id="addMovie" placeholder="Add Title" style="height: 40px;" name="required">
     <lablel>Movie Rating</lablel>
-    <input id="addRating" placeholder="Add Rating" style="height: 20px;" name="required">
+    <input id="addRating" placeholder="Add Rating" style="height: 40px;" name="required">
     <lablel>Movie Genre</lablel>
-    <input id="addGenre" placeholder="Add Genre" style="height: 20px;" name="required">
+    <input id="addGenre" placeholder="Add Genre" style="height: 40px;" name="required">
     <lablel>Movie Year</lablel>
-    <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">
+    <input id="addYear" placeholder="Add Year" style="height: 40px;" name="required">
     <lablel>Movie poster</lablel>
-    <input id="addPoster" placeholder="Add Poster Url" style="height: 20px;" name="required">
-    <!--    buttons-->
+    <input id="addPoster" placeholder="Add Poster Url" style="height: 40px;" name="required">
+
     <button id="addNew">Add</button>
+    <button id="close" onclick="window.location.reload()">Update</button>
 </div>
 
 <!-- Modal -->
@@ -66,7 +67,7 @@
                     <div class="col-6">
                         <label>Movie Title</label>
                         <input id="addMovieModal" placeholder="Edit Title" style="height: 20px;"
-                               spellcheck="true"><br>
+                               spellcheck="true">
                         <lablel>Movie Rating</lablel>
                         <input id="addRatingModal" placeholder="Edit Rating" style="height: 20px;"><br>
                         <lablel>Movie Genre</lablel>

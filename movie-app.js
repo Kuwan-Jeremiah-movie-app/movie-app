@@ -15,21 +15,21 @@ const inputElement = document.querySelector('#inputValue');
 const movieSearchable = document.querySelector('#moviesSearchable');
 
 //movie
-function movieSection(movies) {
+let movieSection = function (movies) {
     return movies.map((movie) => {
         if (movie.poster_path) {
-            return `<span><button id="addNew">+</button></span><img src=${IMAGE_URL + movie.poster_path} data-movie-id=${movie.id}> `;
+            return `<img src=${IMAGE_URL + movie.poster_path} data-movie-id=${movie.id}>`;
         }
     })
 }
 
 //create movie container
-function createMovieContainer(movies) {
+let createMovieContainer = function (movies) {
     const movieElement = document.createElement('div');
     movieElement.setAttribute('class', 'movie');
     const movieTemplate = `<section class="section">${movieSection(movies)}</section>
   <div class="content">
-  <button id="content-close">X</button>
+ 
 <!--  //description -->
 <!--  //add button-->
  
@@ -50,7 +50,7 @@ buttonElement.onclick = function (e) {
         const movies = data.results;
         const movieBlock = createMovieContainer(movies)
         movieSearchable.appendChild(movieBlock)
-        console.log("Data: ", data);
+        // console.log("Data: ", data);
 
     }
 
@@ -59,14 +59,14 @@ buttonElement.onclick = function (e) {
         .then((res) => res.json())
         .then(renderSearchMovies)
         .catch((error) => {
-            console.log("Error: ", error)
+            // console.log("Error: ", error)
         });
     inputElement.value = '';
-    console.log("Value: ", value);
+    // console.log("Value: ", value);
 }
 
 //iframe
-function videoIframe(video) {
+let videoIframe = function (video) {
     const iframe = document.createElement('iframe');
     iframe.src = `https://www.youtube.com/embed/${video.key}`;
     iframe.width = 360;
@@ -74,7 +74,23 @@ function videoIframe(video) {
     iframe.allowFullscreen = true;
     return iframe;
 }
+//video template
+let createVideoTemplate = function (data, content) {
+    //display preview
+    content.innerHTML = "<button id=\'addSearched\'>Add Movie</button>  <button onclick=\"window.location.reload()\">Close</button>"
+    // console.log('Videos: ', data);
+    //loop over video array
+    const videos = data.results;
+    const length = videos.length > 3 ? 3 : videos.length;
+    const iframeContainer = document.createElement('div');
 
+    for (let i = 0; i < length; i++) {
+        const video = videos[i];
+        const iframe = videoIframe(video);
+        iframeContainer.appendChild(iframe);
+        content.appendChild(iframeContainer)
+    }
+}
 
 //event delegation
 document.onclick = function (e) {
@@ -85,34 +101,19 @@ document.onclick = function (e) {
         const content = section.nextElementSibling;
         content.classList.add('content-display')
         // const path = `/movie/${movieId}/videos`;
-        console.log(movieId);
+        // console.log(movieId);
         //https://api.themoviedb.org/3/movie/76341?api_key=<<api_key>>
         const url = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`;
 
         //fetch movie preview
         fetch(url)
             .then((res) => {
-                console.log(res);
+                // console.log(res);
                 return res.json()
             })
-            .then((data) => {
-                //display preview
-                console.log('Videos: ', data);
-                //loop over video array
-                const videos = data.results;
-                const length = videos.length > 3 ? 3 : videos.length;
-                const iframeContainer = document.createElement('div');
-
-                for (let i = 0; i < length; i++) {
-                    const video = videos[i];
-                    const iframe = videoIframe(video);
-                    iframeContainer.appendChild(iframe);
-                    content.appendChild(iframeContainer)
-                }
-
-            })
+            .then((data) => createVideoTemplate(data, content))
             .catch((error) => {
-                console.log("Error: ", error)
+                // console.log("Error: ", error)
             });
 
     }
@@ -131,35 +132,37 @@ fetch(movieApiUrl).then(function (response) {
 })
 
 $("#addNew").click(function (e) {
-    e.preventDefault();
+
     let title = $("#addMovie").val()
     let rating = $("#addRating").val()
     let genre = $("#addGenre").val()
     let year = $("#addYear").val()
-    let poster = $("#addPoster").val()
-    // if (title === "" || rating === "" || genre === "" || year === "" || poster === "") {
-    $(".addGroup input").addClass("required")
-    // } else {
-    const movieObj = {
-        "title": title,
-        "rating": rating,
-        "genre": genre,
-        "year": year,
-        "poster": poster
-    };
-    console.log(movieObj);
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(movieObj),
-    };
-    fetch(movieApiUrl, options).then(function (response) {
-        response.json().then(function (newMovie) {
-            console.log(newMovie)
+
+    if (title === "" || rating === "" || genre === "" || year === "") {
+        $(".addGroup input").addClass("required")
+    } else {
+        const movieObj = {
+            "title": title,
+            "rating": rating,
+            "genre": genre,
+            "year": year,
+            "poster": poster
+        };
+
+        console.log(movieObj);
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieObj),
+        };
+        fetch(movieApiUrl, options).then(function (response) {
+            response.json().then(function (newMovie) {
+                console.log(newMovie)
+            })
         })
-    })
+    }
 })
 
 
@@ -169,7 +172,7 @@ $.ajax(movieApiUrl).done(function (data) {
         movieHtml += `<img src='${movie.poster}' style="width: 100%; min-height: 500px" class="poster d-flex justify-content-between" alt="poster">
 </div>`
         movieHtml += `<div class="card card-back " style="width: 18rem">`;
-        movieHtml += `<h3 class="card-body">${movie.title.toUpperCase()}</h3>`
+        movieHtml += `<h3 class="card-body">${movie.title}</h3>`
         movieHtml += `<h5>${movie.genre}</h5>`
         movieHtml += `<p>Rating: ${movie.rating}</p>`
         movieHtml += `<p>Year: ${movie.year}</p>`
