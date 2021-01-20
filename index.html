@@ -11,19 +11,18 @@
 <body>
 <div id="loader"> Loading ....</div>
 <div class="container-fluid">
-    <div>Navbar</div>
-    <div>
+    <div style="height: 100px" class="brand d-flex align-items-center justify-content-around">
         <h1>Movie Palace</h1>
-    </div>
-    <div>
-        <form>
-            <div class="form-group">
-                <input type="text" id="inputValue">
-                <button type="submit" id="search"> Search a movie</button>
-            </div>
-        </form>
-    </div>
 
+        <div>
+            <form>
+                <div class="form-group">
+                    <input style="width: 300px;" type="text" id="inputValue" placeholder="Search a movie">
+                    <button type="submit" id="search"> Search a movie </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div id="moviesSearchable"></div>
 </div>
 
@@ -36,20 +35,21 @@
     </div>
 </div>
 
-<!--<div class="addGroup">-->
-<!--    <label>Movie Title</label><br>-->
-<!--    <input id="addMovie" placeholder="Add Title" style="height: 20px;" name="required">-->
-<!--    <lablel>Movie Rating</lablel>-->
-<!--    <input id="addRating" placeholder="Add Rating" style="height: 20px;" name="required">-->
-<!--    <lablel>Movie Genre</lablel>-->
-<!--    <input id="addGenre" placeholder="Add Genre" style="height: 20px;" name="required">-->
-<!--    <lablel>Movie Year</lablel>-->
-<!--    <input id="addYear" placeholder="Add Year" style="height: 20px;" name="required">-->
-<!--    <lablel>Movie poster</lablel>-->
-<!--    <input id="addPoster" placeholder="Add Poster Url" style="height: 20px;" name="required">-->
-<!--    &lt;!&ndash;    buttons&ndash;&gt;-->
-<!--    <button id="addNew">Add</button>-->
-<!--</div>-->
+<div class="addGroup" style="font-size: 25px; font-weight: bold">
+    <label>Movie Title</label><br>
+    <input id="addMovie" placeholder="Add Title" style="height: 40px;" name="required">
+    <lablel>Movie Rating</lablel>
+    <input id="addRating" placeholder="Add Rating" style="height: 40px;" name="required">
+    <lablel>Movie Genre</lablel>
+    <input id="addGenre" placeholder="Add Genre" style="height: 40px;" name="required">
+    <lablel>Movie Year</lablel>
+    <input id="addYear" placeholder="Add Year" style="height: 40px;" name="required">
+    <lablel>Movie poster</lablel>
+    <input id="addPoster" placeholder="Add Poster Url" style="height: 40px;" name="required">
+
+    <button id="addNew">Add</button>
+    <button id="close" onclick="window.location.reload()">Update</button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -67,7 +67,7 @@
                     <div class="col-6">
                         <label>Movie Title</label>
                         <input id="addMovieModal" placeholder="Edit Title" style="height: 20px;"
-                               spellcheck="true"><br>
+                               spellcheck="true">
                         <lablel>Movie Rating</lablel>
                         <input id="addRatingModal" placeholder="Edit Rating" style="height: 20px;"><br>
                         <lablel>Movie Genre</lablel>
