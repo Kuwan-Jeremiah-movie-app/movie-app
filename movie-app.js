@@ -150,6 +150,7 @@ $("#addNew").click(function (e) {
             "poster": poster
         };
 
+
         console.log(movieObj);
         const options = {
             method: 'POST',
