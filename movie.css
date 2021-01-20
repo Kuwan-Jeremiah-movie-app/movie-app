@@ -1,3 +1,16 @@
+.loader {
+    border: 16px solid ##666565; /* Light grey */
+    border-top: 16px solid ##000000; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 body{
     background-color: #666565;
     background-image: url("https://www.transparenttextures.com/patterns/large-leather.png");
@@ -6,6 +19,7 @@ body{
     background-color: #000000;
     background-image: url("https://www.transparenttextures.com/patterns/large-leather.png");
     color: whitesmoke;
+
 }
 .required{
     border-color: red;
